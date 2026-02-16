@@ -401,8 +401,8 @@ of this software and associated documentation files...
 ## 📬 Контакты
 
 - **Email**: z6nqhtw7nm@privaterelay.appleid.com
-- **Telegram**: [@yourusername](https://t.me/yourusername)
-- **Twitter**: [@yourusername](https://twitter.com/yourusername)
+- **Telegram**: [@yourusername](https://Maxim_Lime)
+- **YouTube**: [@yourusername](https://youtube.com/Maxim_Lime)
 
 ---
 
