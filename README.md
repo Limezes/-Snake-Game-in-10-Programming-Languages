@@ -400,7 +400,7 @@ of this software and associated documentation files...
 
 ## 📬 Контакты
 
-- **Email**: your.email@example.com
+- **Email**: z6nqhtw7nm@privaterelay.appleid.com
 - **Telegram**: [@yourusername](https://t.me/yourusername)
 - **Twitter**: [@yourusername](https://twitter.com/yourusername)
 
