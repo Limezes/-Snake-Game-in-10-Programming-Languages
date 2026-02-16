@@ -392,9 +392,9 @@ of this software and associated documentation files...
 
 ## ⭐ Авторы
 
-- **[Ваше имя](https://github.com/yourusername)** - Инициатор проекта
-- **[Соавтор 1](https://github.com/coauthor1)** - Python и JavaScript версии
-- **[Соавтор 2](https://github.com/coauthor2)** - C++ и Rust версии
+- **[Limezes](https://github.com/Limezes)** - Инициатор проекта
+- **[Limezes](https://github.com/Limezes)** - Python и JavaScript версии
+- **[Limezes](https://github.com/Limezes)** - C++ и Rust версии
 
 ---
 
