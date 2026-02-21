@@ -1,1 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    max-width: 500px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.score {
+    color: #27ae60;
+}
+
+.high-score {
+    color: #e67e22;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    border: 3px solid #34495e;
+    border-radius: 10px;
+    background: #2c3e50;
+}
+
+.game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-green {
+    background: #27ae60;
+    color: white;
+}
+
+.btn-yellow {
+    background: #f39c12;
+    color: white;
+}
+
+.btn-red {
+    background: #e74c3c;
+    color: white;
+}
+
+.difficulty-selector {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.difficulty-selector select {
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid #3498db;
+    margin-left: 10px;
+}
+
+.instructions {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+.instructions p {
+    margin: 5px 0;
+}
+
+@media (max-width: 500px) {
+    .game-container {
+        padding: 15px;
+    }
+    
+    canvas {
+        width: 300px;
+        height: 300px;
+    }
+}
