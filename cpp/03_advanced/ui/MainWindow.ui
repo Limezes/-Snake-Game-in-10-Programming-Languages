@@ -1,1 +1,174 @@
-
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Snake Game - Advanced</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QFrame" name="gameFrame">
+      <property name="minimumSize">
+       <size>
+        <width>600</width>
+        <height>600</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Sunken</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="scoreLabel">
+        <property name="text">
+         <string>Счёт: 0</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="levelLabel">
+        <property name="text">
+         <string>Уровень: 1</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="highScoreLabel">
+        <property name="text">
+         <string>Рекорд: 0</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuGame">
+    <property name="title">
+     <string>Игра</string>
+    </property>
+    <addaction name="actionNewGame"/>
+    <addaction name="actionPause"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>Настройки</string>
+    </property>
+    <addaction name="actionDifficulty"/>
+    <addaction name="actionControls"/>
+    <addaction name="actionAppearance"/>
+   </widget>
+   <widget class="QMenu" name="menuStatistics">
+    <property name="title">
+     <string>Статистика</string>
+    </property>
+    <addaction name="actionHighScores"/>
+    <addaction name="actionAchievements"/>
+    <addaction name="actionStatistics"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Помощь</string>
+    </property>
+    <addaction name="actionRules"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuGame"/>
+   <addaction name="menuSettings"/>
+   <addaction name="menuStatistics"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <action name="actionNewGame">
+   <property name="text">
+    <string>Новая игра</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionPause">
+   <property name="text">
+    <string>Пауза</string>
+   </property>
+   <property name="shortcut">
+    <string>Space</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Выход</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionDifficulty">
+   <property name="text">
+    <string>Сложность</string>
+   </property>
+  </action>
+  <action name="actionControls">
+   <property name="text">
+    <string>Управление</string>
+   </property>
+  </action>
+  <action name="actionAppearance">
+   <property name="text">
+    <string>Внешний вид</string>
+   </property>
+  </action>
+  <action name="actionHighScores">
+   <property name="text">
+    <string>Рекорды</string>
+   </property>
+  </action>
+  <action name="actionAchievements">
+   <property name="text">
+    <string>Достижения</string>
+   </property>
+  </action>
+  <action name="actionStatistics">
+   <property name="text">
+    <string>Статистика</string>
+   </property>
+  </action>
+  <action name="actionRules">
+   <property name="text">
+    <string>Правила</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>О программе</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
