@@ -1,1 +1,206 @@
+<UserControl x:Class="SnakeGame.Views.GameView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SnakeGame.Views"
+             xmlns:models="clr-namespace:SnakeGame.Models"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800"
+             Background="#1A1A2A"
+             Focusable="True"
+             KeyDown="UserControl_KeyDown">
+    
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя панель -->
+        <Border Grid.Row="0" Background="#16213E" Padding="20" CornerRadius="0,0,10,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Vertical">
+                    <TextBlock Text="СЧЁТ" ForeColor="#8A8A9A" FontSize="12"/>
+                    <TextBlock Text="{Binding Score}" ForeColor="#4ADE80" FontSize="24" FontWeight="Bold"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center">
+                    <TextBlock Text="УРОВЕНЬ" ForeColor="#8A8A9A" FontSize="12" HorizontalAlignment="Center"/>
+                    <TextBlock Text="{Binding Level}" ForeColor="#FBBF24" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Right">
+                    <TextBlock Text="РЕКОРД" ForeColor="#8A8A9A" FontSize="12"/>
+                    <TextBlock Text="{Binding HighScore}" ForeColor="#F87171" FontSize="24" FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Игровое поле -->
+        <Grid Grid.Row="1" Margin="20">
+            <Border BorderBrush="#2A2A3A" BorderThickness="2" CornerRadius="10">
+                <Grid Background="#0F0F1A">
+                    <!-- Сетка -->
+                    <ItemsControl ItemsSource="{Binding GameModel.Walls}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Grid/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type models:Wall}">
+                                <Border Width="25" Height="25" 
+                                        Background="{Binding Color}"
+                                        CornerRadius="3"
+                                        Margin="1">
+                                    <Border.RenderTransform>
+                                        <TranslateTransform X="{Binding X, Converter={local:GridPositionConverter}, ConverterParameter=25}" 
+                                                           Y="{Binding Y, Converter={local:GridPositionConverter}, ConverterParameter=25}"/>
+                                    </Border.RenderTransform>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Еда -->
+                    <ItemsControl ItemsSource="{Binding GameModel.Foods}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Grid/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type models:Food}">
+                                <Ellipse Width="20" Height="20" 
+                                         Fill="{Binding Color}"
+                                         Opacity="{Binding IsExpired, Converter={local:BoolToOpacityConverter}}">
+                                    <Ellipse.RenderTransform>
+                                        <TranslateTransform X="{Binding X, Converter={local:GridPositionConverter}, ConverterParameter=25}" 
+                                                           Y="{Binding Y, Converter={local:GridPositionConverter}, ConverterParameter=25}"/>
+                                    </Ellipse.RenderTransform>
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect Color="{Binding Color}" ShadowDepth="0" BlurRadius="10"/>
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Power-ups -->
+                    <ItemsControl ItemsSource="{Binding GameModel.PowerUps}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Grid/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type models:PowerUp}">
+                                <Border Width="22" Height="22" 
+                                        Background="{Binding Color}"
+                                        CornerRadius="5"
+                                        RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
+                                        <TransformGroup>
+                                            <TranslateTransform X="{Binding X, Converter={local:GridPositionConverter}, ConverterParameter=25}" 
+                                                               Y="{Binding Y, Converter={local:GridPositionConverter}, ConverterParameter=25}"/>
+                                            <RotateTransform Angle="{Binding Age, Converter={local:AgeToRotationConverter}}"/>
+                                        </TransformGroup>
+                                    </Border.RenderTransform>
+                                    <TextBlock Text="{Binding Symbol}" 
+                                               Foreground="White" 
+                                               FontSize="14"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Змейка -->
+                    <ItemsControl ItemsSource="{Binding GameModel.Snake.Body}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Grid/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type models:GridPosition}">
+                                <Border Width="23" Height="23" 
+                                        Background="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.GameModel.Snake.IsInvincible, Converter={local:InvincibleToColorConverter}}"
+                                        CornerRadius="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=DataContext.GameModel.Snake.Body.IndexOf, Converter={local:IndexToRadiusConverter}}"
+                                        Margin="1">
+                                    <Border.RenderTransform>
+                                        <TranslateTransform X="{Binding X, Converter={local:GridPositionConverter}, ConverterParameter=25}" 
+                                                           Y="{Binding Y, Converter={local:GridPositionConverter}, ConverterParameter=25}"/>
+                                    </Border.RenderTransform>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Затемнение при паузе -->
+                    <Border Background="#80000000" 
+                            Visibility="{Binding IsPaused, Converter={StaticResource BoolToVis}}">
+                        <TextBlock Text="ПАУЗА" 
+                                   Foreground="White" 
+                                   FontSize="48" 
+                                   FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center">
+                            <TextBlock.Effect>
+                                <DropShadowEffect Color="Gold" ShadowDepth="0" BlurRadius="20"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                    </Border>
+
+                    <!-- Затемнение при окончании игры -->
+                    <Border Background="#80000000" 
+                            Visibility="{Binding IsGameOver, Converter={StaticResource BoolToVis}}">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Text="GAME OVER" 
+                                       ForeColor="Red" 
+                                       FontSize="48" 
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Center">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect Color="Red" ShadowDepth="0" BlurRadius="20"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <TextBlock Text="Нажмите ПРОБЕЛ для рестарта" 
+                                       ForeColor="White" 
+                                       FontSize="18"
+                                       Margin="0,20,0,0"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Нижняя панель -->
+        <Border Grid.Row="2" Background="#16213E" Padding="10" CornerRadius="10,10,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Пауза" 
+                        Command="{Binding PauseCommand}"
+                        Style="{StaticResource GameButton}"
+                        Margin="5"/>
+                <Button Content="Рестарт" 
+                        Command="{Binding RestartCommand}"
+                        Style="{StaticResource GameButton}"
+                        Margin="5"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
